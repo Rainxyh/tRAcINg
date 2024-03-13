@@ -155,7 +155,7 @@ if(MSVC)
     add_definitions(-DGLOG_NO_ABBREVIATED_SEVERITIES)
 endif()
 
-# glfw
+# Build glfw
 set(GLFW_BUILD_EXAMPLES  OFF CACHE BOOL " " FORCE)
 set(GLFW_BUILD_TESTS     OFF CACHE BOOL " " FORCE)
 set(GLFW_BUILD_DOCS      OFF CACHE BOOL " " FORCE)
@@ -168,20 +168,19 @@ endif ()
 add_subdirectory(glfw)
 set_property(TARGET glfw PROPERTY FOLDER "dependencies")
 
-# glew
+# Build glew
 set(glew-cmake_BUILD_SHARED OFF CACHE BOOL " " FORCE)
 set(glew-cmake_BUILD_STATIC ON  CACHE BOOL " " FORCE)
 
 add_subdirectory(glew)
 set_property(TARGET libglew_static PROPERTY FOLDER "dependencies")
 
-# imgui
-set(
-    INCLUDE_DIRS
-    glfw/include
-    glew/include
+# Build imgui
+set(IMGUI_INCLUDE_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/glfw/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/glew/include
 )
-include_directories(${INCLUDE_DIRS})
+include_directories(${IMGUI_INCLUDE_DIRS})
 add_library(
     imgui_static STATIC
     imgui/imconfig.h
@@ -201,6 +200,15 @@ add_library(
 )
 target_link_libraries(imgui_static libglew_static glfw)
 set_property(TARGET imgui_static PROPERTY FOLDER "dependencies")
+
+# Build dynet
+set(DYNET_INCLUDE_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}/dynet)
+add_subdirectory(dynet)
+set_property(TARGET dynet PROPERTY FOLDER "dependencies")
+if(WITH_CUDA_BACKEND)
+  set_property(TARGET dynetcuda PROPERTY FOLDER "dependencies")
+endif()
 
 # include dir
 set(OPENEXR_INCLUDE_DIRS 
@@ -283,6 +291,7 @@ set(CompilerFlags
     FILESYSTEM_INCLUDE_DIR
     HYPOTHESIS_INCLUDE_DIR
     STB_LIB_INCLUDE_DIR
+    DYNET_INCLUDE_DIR
 )
 
 foreach(CompilerFlag ${CompilerFlags})

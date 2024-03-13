@@ -81,9 +81,6 @@ void check_limits_specialization()
   typedef std::numeric_limits<AD> A;
   typedef std::numeric_limits<Scalar> B;
 
-  // workaround "unsed typedef" warning:
-  VERIFY(!bool(internal::is_same<B, A>::value));
-
 #if EIGEN_HAS_CXX11
   VERIFY(bool(std::is_base_of<B, A>::value));
 #endif

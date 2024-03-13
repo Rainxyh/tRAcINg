@@ -38,6 +38,8 @@ set(
         SYSTEM ${FILESYSTEM_INCLUDE_DIR}
         # STB Image Write
         SYSTEM ${STB_IMAGE_WRITE_INCLUDE_DIR}
+        # Dynet
+        SYSTEM ${DYNET_INCLUDE_DIR}
 )
 
 set(
@@ -51,6 +53,7 @@ set(
         pugixml
         glog
         #nanogui
+        dynet
 )
 
 #########################################################################
@@ -255,6 +258,13 @@ target_link_libraries(${PROJECT_NAME} ${EXTENSION_LIBS})
 
 #########################################################################
 
+include_directories(${DYNET_INCLUDE_DIR})
+
+add_executable(RL_dynet ${CMAKE_CURRENT_SOURCE_DIR}/src/train_tok-embed.cpp)
+
+target_link_libraries(RL_dynet dynet)
+
+#########################################################################
 
 # Force colored output for the ninja generator
 if (CMAKE_GENERATOR STREQUAL "Ninja")
