@@ -1,0 +1,270 @@
+cmake_minimum_required(VERSION 3.10)
+project(Rain)
+
+
+# add extension libraries
+add_subdirectory(ext)
+
+set(
+        EXTENSION_INCLUDE_DIRS
+
+        ${IMGUI_INCLUDE_DIR}
+        ${GLOG_INCLUDE_DIR}
+        ${STB_LIB_INCLUDE_DIR}
+        # tinyformat string formatting library
+        ${TFM_INCLUDE_DIR}
+        # Eigen linear algebra library
+        SYSTEM ${EIGEN_INCLUDE_DIR}
+        # OpenEXR high dynamic range bitmap library
+        SYSTEM ${OPENEXR_INCLUDE_DIRS}
+        # Intel Thread Building Blocks
+        SYSTEM ${TBB_INCLUDE_DIR}
+        # Pseudorandom number generator
+        ${PCG32_INCLUDE_DIR}
+        # PugiXML parser
+        ${PUGIXML_INCLUDE_DIR}
+        # Helper functions for statistical hypothesis tests
+        ${HYPOTHESIS_INCLUDE_DIR}
+        # GLFW library for OpenGL context creation
+        SYSTEM ${GLFW_INCLUDE_DIR}
+        # GLEW library for accessing OpenGL functions
+        SYSTEM ${GLEW_INCLUDE_DIR}
+        # NanoVG drawing library
+        SYSTEM ${NANOVG_INCLUDE_DIR}
+        # NanoGUI user interface library
+        SYSTEM ${NANOGUI_INCLUDE_DIR}
+        SYSTEM ${NANOGUI_EXTRA_INCS}
+        # Portable filesystem API
+        SYSTEM ${FILESYSTEM_INCLUDE_DIR}
+        # STB Image Write
+        SYSTEM ${STB_IMAGE_WRITE_INCLUDE_DIR}
+)
+
+set(
+        EXTENSION_LIBS
+
+        libglew_static
+        glfw
+        imgui_static
+        tbb_static
+        IlmImf
+        pugixml
+        glog
+        #nanogui
+)
+
+#########################################################################
+
+set(
+        INCLUDE_DIRS
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set(
+        SOURCE_FILES
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/acceleration/BVHAcceleration.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/acceleration/HLBVHAcceleration.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/BumpMapBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/CoatingBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/ConductorBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/DielectricBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/DiffuseBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/MicrofacetBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/MirrorBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/NormalMapBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/PlasticBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/RoughCoatingBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/RoughConductorBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/RoughDielectricBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/RoughDiffuseBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/RoughPlasticBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/TwoSidedBSDF.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/camera/PerspectiveCamera.cpp
+        
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Acceleration.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Bitmap.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Block.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/BoundingBox.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/BSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Camera.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Chi2Test.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Color.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Common.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/DiscretePDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Emitter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Frame.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Integrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Intersection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/MemoryArena.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Mesh.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/MicrofacetDistribution.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/MipMap.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Object.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/PropertyList.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Ray.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/ReconstructionFilter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/RoughTransmitance.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Sampler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Sampling.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Scene.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Screen.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Shape.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/StudentTTest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Texture.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Timer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Transform.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Vector.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/emitter/AreaLight.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/emitter/ConstantLight.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/emitter/DirectionalLight.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/emitter/EnvironmentLight.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/emitter/PointLight.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/filter/BoxFilter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/filter/GaussianFilter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/filter/MitchellNetravalFilter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/filter/TentFilter.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/integrator/AoIntegrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/integrator/NormalIntegrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/integrator/PathEMSIntegrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/integrator/PathMATSIntegrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/integrator/PathMISIntegrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/integrator/SimpleIntegrator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/integrator/WhittedIntegrator.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/mesh/WavefrontObjMesh.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/sampler/IndependentSampler.cpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/texture/BitmapTexture.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/texture/CheckerboardTexture.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/texture/CurvatureTexture.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/texture/GridTexture.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/texture/ScaleTexture.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/texture/WireframeTexture.cpp
+)
+
+set(
+        HEADER_FILS
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/acceleration/BVHAcceleration.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/acceleration/HLBVHAcceleration.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/BumpMapBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/CoatingBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/ConductorBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/DielectricBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/DiffuseBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/MicrofacetBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/MirrorBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/NormalMapBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/PlasticBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/RoughCoatingBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/RoughConductorBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/RoughDielectricBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/RoughDiffuseBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/RoughPlasticBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/TwoSidedBSDF.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/camera/PerspectiveCamera.hpp
+        
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Acceleration.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Bitmap.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Block.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/BoundingBox.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/BSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Camera.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Chi2Test.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Color.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Common.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/DiscretePDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Emitter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Frame.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Integrator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Intersection.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/MemoryArena.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Mesh.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/MicrofacetDistribution.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/MipMap.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Object.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Parser.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/PropertyList.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Ray.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/ReconstructionFilter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/RoughTransmitance.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Sampler.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Sampling.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Scene.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Screen.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Shape.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/StudentTTest.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Texture.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Timer.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Transform.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Vector.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/emitter/AreaLight.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/emitter/ConstantLight.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/emitter/DirectionalLight.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/emitter/EnvironmentLight.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/emitter/PointLight.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/filter/BoxFilter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/filter/GaussianFilter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/filter/MitchellNetravalFilter.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/filter/TentFilter.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/integrator/AoIntegrator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/integrator/NormalIntegrator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/integrator/PathEMSIntegrator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/integrator/PathMATSIntegrator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/integrator/PathMISIntegrator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/integrator/SimpleIntegrator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/integrator/WhittedIntegrator.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/mesh/WavefrontObjMesh.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/sampler/IndependentSampler.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/texture/BitmapTexture.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/texture/CheckerboardTexture.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/texture/CurvatureTexture.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/texture/GridTexture.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/texture/ScaleTexture.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/texture/WireframeTexture.hpp
+)
+
+#########################################################################
+
+include_directories(${EXTENSION_INCLUDE_DIRS} ${INCLUDE_DIRS})
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILS})
+
+target_link_libraries(${PROJECT_NAME} ${EXTENSION_LIBS})
+
+#target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+
+#########################################################################
+
+
+# Force colored output for the ninja generator
+if (CMAKE_GENERATOR STREQUAL "Ninja")
+  if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcolor-diagnostics")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics")
+  elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fdiagnostics-color=always")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=always")
+  endif()
+endif()
+
+#target_compile_features(WarpTest PRIVATE cxx_std_17)

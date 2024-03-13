@@ -1,0 +1,485 @@
+#include <core\Mesh.hpp>
+#include <core\Shape.hpp>
+
+NAMESPACE_BEGIN
+
+Triangle::Triangle()
+{
+
+}
+
+Triangle::Triangle(Mesh * pMesh, uint32_t * pFacet, uint32_t iFacet) :
+	m_pMesh(pMesh), m_pFacet(pFacet), m_iFacet(iFacet)
+{
+
+}
+
+void Triangle::SamplePosition(const Point2f & Sample, Point3f & P, Normal3f & N) const
+{
+	/** This method is correct theoretically, but won't pass the test */
+	//// Ref : https://blog.csdn.net/noahzuo/article/details/52886447 or <<Graphics Gems>>
+	//float SqrY = Sample.y();
+	//float Alpha = 1.0f - SqrY;
+	//float Beta = (1.0f - Sample.x()) * SqrY;
+	//float Gamma = Sample.x() * SqrY;
+
+	float SqrOneMinusEpsilon1 = std::sqrt(1.0f - Sample.x());
+	float Alpha = 1.0f - SqrOneMinusEpsilon1;
+	float Beta = Sample.y() * SqrOneMinusEpsilon1;
+	float Gamma = 1.0f - Alpha - Beta;
+
+	const MatrixXu & Indices = m_pMesh->GetIndices();
+	const MatrixXf & Positions = m_pMesh->GetVertexPositions();
+	const MatrixXf & Normals = m_pMesh->GetVertexNormals();
+
+	uint32_t Idx0 = Indices(0, m_iFacet), Idx1 = Indices(1, m_iFacet), Idx2 = Indices(2, m_iFacet);
+	Point3f P0 = Positions.col(Idx0), P1 = Positions.col(Idx1), P2 = Positions.col(Idx2);
+
+	P = Gamma * P0 + Alpha * P1 + Beta * P2;
+
+	if (Normals.size() > 0)
+	{
+		Normal3f N0 = Normals.col(Idx0), N1 = Normals.col(Idx1), N2 = Normals.col(Idx2);
+		N = Gamma * N0 + Alpha * N1 + Beta * N2;
+	}
+}
+
+float Triangle::SurfaceArea() const
+{
+	return m_pMesh->SurfaceArea(m_iFacet);
+}
+
+BoundingBox3f Triangle::GetBoundingBox() const
+{
+	return m_pMesh->GetBoundingBox(m_iFacet);
+}
+
+Point3f Triangle::GetCentroid() const
+{
+	return m_pMesh->GetCentroid(m_iFacet);
+}
+
+bool Triangle::RayIntersect(const Ray3f & Ray, float & U, float & V, float & T) const
+{
+	return m_pMesh->RayIntersect(m_iFacet, Ray, U, V, T);
+}
+
+void Triangle::PostIntersect(Intersection & Isect) const
+{
+	/* At this point, we now know that there is an intersection,
+	and we know the triangle index of the closest such intersection.
+
+	The following computes a number of additional properties which
+	characterize the intersection (normals, texture coordinates, etc..)
+	*/
+
+	Isect.pEmitter = Isect.pShape->GetEmitter();
+	Isect.pBSDF = Isect.pShape->GetBSDF();
+
+	/* Find the barycentric coordinates */
+	Vector3f Barycentric;
+	Barycentric << 1 - Isect.UV.sum(), Isect.UV;
+	Isect.UV = Point2f(0.0f);
+
+	/* References to all relevant mesh buffers */
+	const Mesh * pMesh = Isect.pShape->GetMesh();
+	const MatrixXf & V = pMesh->GetVertexPositions();
+	const MatrixXf & N = pMesh->GetVertexNormals();
+	const MatrixXf & UV = pMesh->GetVertexTexCoords();
+	const MatrixXu & F = pMesh->GetIndices();
+
+	/* Vertex indices of the triangle */
+	uint32_t Idx0 = F(0, m_iFacet), Idx1 = F(1, m_iFacet), Idx2 = F(2, m_iFacet);
+	Point3f P0 = V.col(Idx0), P1 = V.col(Idx1), P2 = V.col(Idx2);
+
+	/* Compute the intersection positon accurately using barycentric coordinates */
+	Isect.P = Barycentric.x() * P0 + Barycentric.y() * P1 + Barycentric.z() * P2;
+
+	/* Compute proper texture coordinates if provided by the mesh */
+	if (UV.size() > 0)
+	{
+		Isect.UV = Barycentric.x() * UV.col(Idx0) + Barycentric.y() * UV.col(Idx1) + Barycentric.z() * UV.col(Idx2);
+	}
+
+	/* Compute the geometry frame */
+	Isect.GeometricFrame = Frame((P1 - P0).cross(P2 - P0).normalized());
+
+	if (N.size() > 0 && UV.size() > 0)
+	{
+		Point2f UV0 = UV.col(Idx0), UV1 = UV.col(Idx1), UV2 = UV.col(Idx2);
+		Vector3f dP1 = P1 - P0, dP2 = P2 - P0;
+		Vector2f dUV1 = UV1 - UV0, dUV2 = UV2 - UV0;
+		float Length = dP1.cross(dP2).norm();
+
+		if (Length == 0)
+		{
+			Isect.ShadingFrame = Isect.GeometricFrame;
+		}
+		else
+		{
+			float Det = dUV1.x() * dUV2.y() - dUV1.y() * dUV2.x();
+
+			if (Det == 0.0f)
+			{
+				// Triangle degeneration
+
+				Isect.ShadingFrame = Frame(
+					(Barycentric.x() * N.col(Idx0) + Barycentric.y() * N.col(Idx1) + Barycentric.z() * N.col(Idx2)).normalized()
+				);
+
+				Isect.dPdU = Isect.ShadingFrame.S;
+				Isect.dPdV = Isect.ShadingFrame.T;
+				Isect.dNdU = Vector3f(0.0f);
+				Isect.dNdV = Vector3f(0.0f);
+				Isect.bHasUVPartial = true;
+			}
+			else
+			{
+				float InvDet = 1.0f / Det;
+				Vector3f dPdU = ( dUV2.y() * dP1 - dUV1.y() * dP2) * InvDet;
+				Vector3f dPdV = (-dUV2.x() * dP1 + dUV1.x() * dP2) * InvDet;
+
+				Normal3f NShade = Barycentric.x() * N.col(Idx0) + Barycentric.y() * N.col(Idx1) + Barycentric.z() * N.col(Idx2);
+				float Ln = NShade.norm();
+				float InvLn = 1.0f / Ln;
+				NShade *= InvLn;
+
+				Vector3f dNdU = (N.col(Idx1) - N.col(Idx0)) * InvLn;
+				dNdU -= NShade * NShade.dot(dNdU);
+				Vector3f dNdV = (N.col(Idx2) - N.col(Idx0)) * InvLn;
+				dNdV -= NShade * NShade.dot(dNdV);
+
+				Isect.dNdU = ( dUV2.y() * dNdU - dUV1.y() * dNdV) * InvDet;
+				Isect.dNdV = (-dUV2.x() * dNdU + dUV1.x() * dNdV) * InvDet;
+				Isect.dPdU = dPdU;
+				Isect.dPdV = dPdV;
+				Isect.bHasUVPartial = true;
+
+				Isect.ShadingFrame = Frame(NShade, dPdU);
+			}
+		}
+	}
+	else if (N.size() > 0)
+	{
+		Isect.ShadingFrame = Frame(
+			(Barycentric.x() * N.col(Idx0) + Barycentric.y() * N.col(Idx1) + Barycentric.z() * N.col(Idx2)).normalized()
+		);
+	}
+	else
+	{
+		Isect.ShadingFrame = Isect.GeometricFrame;
+	}
+}
+
+Mesh * Triangle::GetMesh() const
+{
+	return m_pMesh;
+}
+
+uint32_t Triangle::GetFacetIndex() const
+{
+	return m_iFacet;
+}
+
+bool Triangle::IsEmitter() const
+{
+	return m_pMesh->IsEmitter();
+}
+
+Emitter * Triangle::GetEmitter()
+{
+	return m_pMesh->GetEmitter();
+}
+
+const Emitter * Triangle::GetEmitter() const
+{
+	return m_pMesh->GetEmitter();
+}
+
+const BSDF * Triangle::GetBSDF() const
+{
+	return m_pMesh->GetBSDF();
+}
+
+std::string Triangle::ToString() const
+{
+	const MatrixXf & V = m_pMesh->GetVertexPositions();
+	uint32_t iV0 = m_pFacet[0];
+	uint32_t iV1 = m_pFacet[1];
+	uint32_t iV2 = m_pFacet[2];
+	Point3f P0 = V.col(iV0);
+	Point3f P1 = V.col(iV1);
+	Point3f P2 = V.col(iV2);
+
+	return tfm::format(
+		"Triangle[\n"
+		"  v0 = %s, v1 = %s, v2 = %s,\n"
+		"  emmiter = %s,\n"
+		"  BSDF = %s"
+		"]",
+		P0.ToString(),
+		P1.ToString(),
+		P2.ToString(),
+		IsEmitter() ? Indent(GetEmitter()->ToString()) : "<null>",
+		Indent(GetBSDF()->ToString())
+	);
+}
+
+Mesh::~Mesh()
+{
+	delete m_pBSDF;
+}
+
+void Mesh::Activate()
+{
+	if (m_pBSDF == nullptr)
+	{
+		/* If no material was assigned, instantiate a diffuse BRDF */
+		LOG(WARNING) << "No BSDF was specified, create a default BSDF.";
+		m_pBSDF = (BSDF*)(ObjectFactory::CreateInstance(DEFAULT_MESH_BSDF, PropertyList()));
+	}
+
+	if (m_pBSDF->HasBSDFType(EBSDFType::EUVDependent))
+	{
+		if (m_UV.size() == 0)
+		{
+			LOG(WARNING) << "Attached BSDF is UV dependent, but the mesh does not have UV coordinate!";
+		}
+	}
+
+	std::vector<float> Areas(GetTriangleCount());
+	// Create the pdf (defined by the area of each triangle)
+	for (uint32_t i = 0; i < GetTriangleCount(); i++)
+	{
+		float Area = SurfaceArea(i);
+		Areas[i] = Area;
+		m_MeshArea += Area;
+	}
+	m_InvMeshArea = 1.0f / m_MeshArea;
+
+	m_pPDF.reset(new DiscretePDF1D(Areas.data(), int(Areas.size())));
+}
+
+uint32_t Mesh::GetTriangleCount() const
+{
+	return uint32_t(m_F.cols());
+}
+
+uint32_t Mesh::GetVertexCount() const
+{
+	return uint32_t(m_V.cols());
+}
+
+void Mesh::SamplePosition(float Sample1D, const Point2f & Sample2D, Point3f & P, Normal3f & N) const
+{
+	size_t TriangleIdx = m_pPDF->SampleDiscrete(Sample1D);
+
+	/** This method is correct theoretically, but won't pass test */
+	//// Ref : https://blog.csdn.net/noahzuo/article/details/52886447 or <<Graphics Gems>>
+	//float SqrY = Sample2D.y();
+	//float Alpha = 1.0f - SqrY;
+	//float Beta = (1.0f - Sample2D.x()) * SqrY;
+	//float Gamma = Sample2D.x() * SqrY;
+
+	float SqrOneMinusEpsilon1 = std::sqrt(1.0f - Sample2D.x());
+	float Alpha = 1.0f - SqrOneMinusEpsilon1;
+	float Beta = Sample2D.y() * SqrOneMinusEpsilon1;
+	float Gamma = 1.0f - Alpha - Beta;
+
+	uint32_t Idx0 = m_F(0, TriangleIdx), Idx1 = m_F(1, TriangleIdx), Idx2 = m_F(2, TriangleIdx);
+	Point3f P0 = m_V.col(Idx0), P1 = m_V.col(Idx1), P2 = m_V.col(Idx2);
+
+	P = Gamma * P0 + Alpha * P1 + Beta * P2;
+
+	if (m_N.size() > 0)
+	{
+		Normal3f N0 = m_N.col(Idx0), N1 = m_N.col(Idx1), N2 = m_N.col(Idx2);
+		N = Gamma * N0 + Alpha * N1 + Beta * N2;
+	}
+	else
+	{
+		N = (P1 - P0).cross(P2 - P0).normalized();
+	}
+}
+
+float Mesh::Pdf() const
+{
+	return m_InvMeshArea;
+}
+
+float Mesh::SurfaceArea() const
+{
+	return m_MeshArea;
+}
+
+float Mesh::SurfaceArea(uint32_t Index) const
+{
+	uint32_t Idx0 = m_F(0, Index), Idx1 = m_F(1, Index), Idx2 = m_F(2, Index);
+	const Point3f P0 = m_V.col(Idx0), P1 = m_V.col(Idx1), P2 = m_V.col(Idx2);
+	return 0.5f * Vector3f((P1 - P0).cross(P2 - P0)).norm();
+}
+
+const BoundingBox3f & Mesh::GetBoundingBox() const
+{
+	return m_BBox;
+}
+
+BoundingBox3f Mesh::GetBoundingBox(uint32_t Index) const
+{
+	BoundingBox3f Result(m_V.col(m_F(0, Index)));
+	Result.ExpandBy(m_V.col(m_F(1, Index)));
+	Result.ExpandBy(m_V.col(m_F(2, Index)));
+	return Result;
+}
+
+Point3f Mesh::GetCentroid(uint32_t Index) const
+{
+	return (1.0f / 3.0f) * (m_V.col(m_F(0, Index)) + m_V.col(m_F(1, Index)) + m_V.col(m_F(2, Index)));
+}
+
+bool Mesh::RayIntersect(uint32_t Index, const Ray3f & Ray, float & U, float & V, float & T) const
+{
+	uint32_t Idx0 = m_F(0, Index), Idx1 = m_F(1, Index), Idx2 = m_F(2, Index);
+	const Point3f P0 = m_V.col(Idx0), P1 = m_V.col(Idx1), P2 = m_V.col(Idx2);
+
+	/* Find vectors for two edges sharing v[0] */
+	Vector3f Edge1 = P1 - P0, Edge2 = P2 - P0;
+
+	/* Begin calculating determinant - also used to calculate U parameter */
+	Vector3f PVec = Ray.Direction.cross(Edge2);
+
+	/* If determinant is near zero, ray lies in plane of triangle */
+	float Det = Edge1.dot(PVec);
+
+	if (Det > -1e-8f && Det < 1e-8f)
+	{
+		return false;
+	}
+	float InvDet = 1.0f / Det;
+
+	/* Calculate distance from v[0] to ray origin */
+	Vector3f TVec = Ray.Origin - P0;
+
+	/* Calculate U parameter and test bounds */
+	U = TVec.dot(PVec) * InvDet;
+	if (U < 0.0 || U > 1.0)
+	{
+		return false;
+	}
+
+	/* Prepare to test V parameter */
+	Vector3f QVec = TVec.cross(Edge1);
+
+	/* Calculate V parameter and test bounds */
+	V = Ray.Direction.dot(QVec) * InvDet;
+	if (V < 0.0 || U + V > 1.0)
+	{
+		return false;
+	}
+
+	/* Ray intersects triangle -> compute t */
+	T = Edge2.dot(QVec) * InvDet;
+
+	return T >= Ray.MinT && T <= Ray.MaxT;
+}
+
+const MatrixXf & Mesh::GetVertexPositions() const
+{
+	return m_V;
+}
+
+const MatrixXf & Mesh::GetVertexNormals() const
+{
+	return m_N;
+}
+
+const MatrixXf & Mesh::GetVertexTexCoords() const
+{
+	return m_UV;
+}
+
+const MatrixXu & Mesh::GetIndices() const
+{
+	return m_F;
+}
+
+bool Mesh::IsEmitter() const
+{
+	return m_pEmitter != nullptr;
+}
+
+Emitter * Mesh::GetEmitter()
+{
+	return m_pEmitter;
+}
+
+const Emitter * Mesh::GetEmitter() const
+{
+	return m_pEmitter;
+}
+
+const BSDF * Mesh::GetBSDF() const
+{
+	return m_pBSDF;
+}
+
+const std::string & Mesh::GetName() const
+{
+	return m_Name;
+}
+
+void Mesh::AddChild(Object * pChildObj, const std::string & Name)
+{
+	switch (pChildObj->GetClassType())
+	{
+	case EClassType::EBSDF:
+		if (m_pBSDF != nullptr)
+		{
+			throw RainException("Mesh: tried to register multiple BSDF instances!");
+		}
+		m_pBSDF = (BSDF*)(pChildObj);
+		break;
+	case EClassType::EEmitter: 
+		if (m_pEmitter != nullptr)
+		{
+			throw RainException("Mesh: tried to register multiple Emitter instances!");
+		}
+		m_pEmitter = (Emitter*)(pChildObj);
+		if (m_pEmitter->GetEmitterType() != EEmitterType::EArea)
+		{
+			throw RainException("Mesh: only area light can be attached!");
+		}
+		break;
+	default:
+		throw RainException("Mesh::AddChild(<%s>, <%s>) is not supported!",
+			ClassTypeName(pChildObj->GetClassType()), Name
+		);
+	}
+}
+
+std::string Mesh::ToString() const
+{
+	return tfm::format(
+		"Mesh[\n"
+		"  name = \"%s\",\n"
+		"  vertexCount = %i,\n"
+		"  triangleCount = %i,\n"
+		"  bsdf = %s,\n"
+		"  emitter = %s\n"
+		"]",
+		m_Name,
+		m_V.cols(),
+		m_F.cols(),
+		m_pBSDF != nullptr ? Indent(m_pBSDF->ToString()) : std::string("null"),
+		m_pEmitter != nullptr ? Indent(m_pEmitter->ToString()) : std::string("null")
+	);
+}
+
+Object::EClassType Mesh::GetClassType() const
+{
+	return EClassType::EMesh;
+}
+
+Mesh::Mesh() { }
+
+NAMESPACE_END
