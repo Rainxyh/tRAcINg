@@ -54,6 +54,7 @@ set(
         glog
         #nanogui
         dynet
+        pybind
 )
 
 #########################################################################
@@ -258,13 +259,50 @@ target_link_libraries(${PROJECT_NAME} ${EXTENSION_LIBS})
 
 #########################################################################
 
-include_directories(${DYNET_INCLUDE_DIR})
+set(
+        RL_HEADER_FILS
 
-add_executable(RL_dynet ${CMAKE_CURRENT_SOURCE_DIR}/src/train_tok-embed.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/ac/AC_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/ddpg/ddpg_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/dqn/dqn_base_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/dqn/dqn_prioritizedReply_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/dqn/dqn_randomReply_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/policy_gradient/reinforce_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/ppo/PPO_Continuous_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/ppo/PPO_Discrete_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/qlearning/qlearning_agent.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/sarsa/sarsa_agent.hpp
 
-target_link_libraries(RL_dynet dynet)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/common/memory_reply.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/common/rl_config.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/common/state_action.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/env/aifan_simple/aifan.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/env/gym_cpp/gymcpp.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/network/dynet_network.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/network/mlp.hpp
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/generic.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/getopt.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/math_func.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/operator.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/random.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/reduce_tree.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/ring_vector.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/timer.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/tool/utility.hpp
+)
+
+include_directories(${DYNET_INCLUDE_DIR} ${PYBIND11_INCLUDE_DIR})
+
+add_executable(RL_dynet ${CMAKE_CURRENT_SOURCE_DIR}/src/RL_test.cpp ${RL_HEADER_FILS})
+
+target_link_libraries(RL_dynet dynet pybind11::embed)
 
 #########################################################################
+
+add_subdirectory(src/train)
 
 # Force colored output for the ninja generator
 if (CMAKE_GENERATOR STREQUAL "Ninja")

@@ -210,6 +210,9 @@ if(WITH_CUDA_BACKEND)
   set_property(TARGET dynetcuda PROPERTY FOLDER "dependencies")
 endif()
 
+# Build pybind11
+add_subdirectory(pybind11)
+
 # include dir
 set(OPENEXR_INCLUDE_DIRS 
     ${CMAKE_CURRENT_SOURCE_DIR}/openexr/IlmBase/Imath
@@ -249,6 +252,8 @@ set(STB_IMAGE_WRITE_INCLUDE_DIR
   ${CMAKE_CURRENT_SOURCE_DIR}/nanogui/ext/nanovg/example)
 set(NANOGUI_INCLUDE_DIR
   ${CMAKE_CURRENT_SOURCE_DIR}/nanogui/include)
+set(PYBIND11_INCLUDE_DIR
+  ${CMAKE_CURRENT_SOURCE_DIR}/pybind11/include)
 
 # Compile remainder of the codebase with compiler warnings turned on
 if(MSVC)
@@ -292,6 +297,7 @@ set(CompilerFlags
     HYPOTHESIS_INCLUDE_DIR
     STB_LIB_INCLUDE_DIR
     DYNET_INCLUDE_DIR
+    PYBIND11_INCLUDE_DIR
 )
 
 foreach(CompilerFlag ${CompilerFlags})
