@@ -1,0 +1,10 @@
+^E:\GITHUB\TRACING\CUDAPATHTRACERRL\EXTERNAL\GLFW-3.1.2\SRC\CMAKELISTS.TXT
+setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SE:/Github/tRAcINg/CUDAPathTracerRL -BE:/Github/tRAcINg/CUDAPathTracerRL/build --check-stamp-file E:/Github/tRAcINg/CUDAPathTracerRL/build/external/glfw-3.1.2/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

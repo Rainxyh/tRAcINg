@@ -158,7 +158,7 @@ set(
 )
 
 set(
-        HEADER_FILS
+        HEADER_FILES
 
         ${CMAKE_CURRENT_SOURCE_DIR}/include/acceleration/BVHAcceleration.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/acceleration/HLBVHAcceleration.hpp
@@ -251,7 +251,7 @@ set(
 
 include_directories(${EXTENSION_INCLUDE_DIRS} ${INCLUDE_DIRS})
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILS})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 
 target_link_libraries(${PROJECT_NAME} ${EXTENSION_LIBS})
 
@@ -260,7 +260,7 @@ target_link_libraries(${PROJECT_NAME} ${EXTENSION_LIBS})
 #########################################################################
 
 set(
-        RL_HEADER_FILS
+        RL_HEADER_FILES
 
         ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/ac/AC_agent.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/RL/agent/ddpg/ddpg_agent.hpp
@@ -296,7 +296,7 @@ set(
 
 include_directories(${DYNET_INCLUDE_DIR} ${PYBIND11_INCLUDE_DIR})
 
-add_executable(RL_dynet ${CMAKE_CURRENT_SOURCE_DIR}/src/RL_test.cpp ${RL_HEADER_FILS})
+add_executable(RL_dynet ${CMAKE_CURRENT_SOURCE_DIR}/src/RL_test.cpp ${RL_HEADER_FILES})
 
 target_link_libraries(RL_dynet dynet pybind11::embed)
 
@@ -316,3 +316,5 @@ if (CMAKE_GENERATOR STREQUAL "Ninja")
 endif()
 
 #target_compile_features(WarpTest PRIVATE cxx_std_17)
+
+add_subdirectory(CUDAPathTracerRL)

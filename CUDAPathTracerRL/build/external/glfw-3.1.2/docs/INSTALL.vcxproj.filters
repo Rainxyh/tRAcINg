@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\75608ed848249a37ca40bbe7657408cf\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1B56F4DC-C2FD-305E-9C0D-9E235C4123B6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

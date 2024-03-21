@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{51D9FF6D-0542-3F95-9E8B-CE98D5B7C4A1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>cuda_base</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.4.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cuda_base.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cuda_base</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cuda_base.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cuda_base</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">cuda_base.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">cuda_base</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">cuda_base.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">cuda_base</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CudaCompile>
+      <Include>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(Include)</Include>
+      <Defines>%(Defines);_WINDOWS;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug"</Defines>
+      <AdditionalOptions>%(AdditionalOptions) -Xcompiler="/EHsc -Zi -Ob0"</AdditionalOptions>
+      <CodeGeneration></CodeGeneration>
+      <CompileOut>$(IntDir)%(Filename).obj</CompileOut>
+      <CudaRuntime>Static</CudaRuntime>
+      <GPUDebugInfo>false</GPUDebugInfo>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <Optimization>Od</Optimization>
+      <Runtime>MDd</Runtime>
+      <RuntimeChecks>RTC1</RuntimeChecks>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <TypeInfo>true</TypeInfo>
+      <UseHostInclude>false</UseHostInclude>
+      <Warning>W3</Warning>
+    </CudaCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <CudaLink>
+      <AdditionalDependencies>cudadevrt.lib ;cudart_static.lib </AdditionalDependencies>
+      <AdditionalOptions>-forward-unknown-to-host-compiler -Wno-deprecated-gpu-targets -D_WINDOWS -Xcompiler="/W3 /GR /EHsc" -Xcompiler="-MDd  -Zi -Ob0 -Od /RTC1"</AdditionalOptions>
+      <PerformDeviceLink>true</PerformDeviceLink>
+    </CudaLink>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CudaCompile>
+      <Include>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(Include)</Include>
+      <Defines>%(Defines);_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release"</Defines>
+      <AdditionalOptions>%(AdditionalOptions) -Xcompiler="/EHsc -Ob2"</AdditionalOptions>
+      <CodeGeneration></CodeGeneration>
+      <CompileOut>$(IntDir)%(Filename).obj</CompileOut>
+      <CudaRuntime>Static</CudaRuntime>
+      <GPUDebugInfo>false</GPUDebugInfo>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <Optimization>O2</Optimization>
+      <Runtime>MD</Runtime>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <TypeInfo>true</TypeInfo>
+      <UseHostInclude>false</UseHostInclude>
+      <Warning>W3</Warning>
+    </CudaCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <CudaLink>
+      <AdditionalDependencies>cudadevrt.lib ;cudart_static.lib </AdditionalDependencies>
+      <AdditionalOptions>-forward-unknown-to-host-compiler -Wno-deprecated-gpu-targets -D_WINDOWS -Xcompiler="/W3 /GR /EHsc" -Xcompiler="-MD -O2 -Ob2" -DNDEBUG</AdditionalOptions>
+      <PerformDeviceLink>true</PerformDeviceLink>
+    </CudaLink>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CudaCompile>
+      <Include>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(Include)</Include>
+      <Defines>%(Defines);_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel"</Defines>
+      <AdditionalOptions>%(AdditionalOptions) -Xcompiler="/EHsc -Ob1"</AdditionalOptions>
+      <CodeGeneration></CodeGeneration>
+      <CompileOut>$(IntDir)%(Filename).obj</CompileOut>
+      <CudaRuntime>Static</CudaRuntime>
+      <GPUDebugInfo>false</GPUDebugInfo>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <Optimization>O1</Optimization>
+      <Runtime>MD</Runtime>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <TypeInfo>true</TypeInfo>
+      <UseHostInclude>false</UseHostInclude>
+      <Warning>W3</Warning>
+    </CudaCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <CudaLink>
+      <AdditionalDependencies>cudadevrt.lib ;cudart_static.lib </AdditionalDependencies>
+      <AdditionalOptions>-forward-unknown-to-host-compiler -Wno-deprecated-gpu-targets -D_WINDOWS -Xcompiler="/W3 /GR /EHsc" -Xcompiler="-MD -O1 -Ob1" -DNDEBUG</AdditionalOptions>
+      <PerformDeviceLink>true</PerformDeviceLink>
+    </CudaLink>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <CudaCompile>
+      <Include>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(Include)</Include>
+      <Defines>%(Defines);_WINDOWS;NDEBUG;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo"</Defines>
+      <AdditionalOptions>%(AdditionalOptions) -Xcompiler="/EHsc -Zi -Ob1"</AdditionalOptions>
+      <CodeGeneration></CodeGeneration>
+      <CompileOut>$(IntDir)%(Filename).obj</CompileOut>
+      <CudaRuntime>Static</CudaRuntime>
+      <GPUDebugInfo>false</GPUDebugInfo>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <Optimization>O2</Optimization>
+      <Runtime>MD</Runtime>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <TypeInfo>true</TypeInfo>
+      <UseHostInclude>false</UseHostInclude>
+      <Warning>W3</Warning>
+    </CudaCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\Github\tRAcINg\CUDAPathTracerRL\external\glfw-3.1.2\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glew-2.2.0\include;E:\Github\tRAcINg\CUDAPathTracerRL\external\glm-0.9.7.1;E:\Github\tRAcINg\CUDAPathTracerRL\.;E:\Github\tRAcINg\CUDAPathTracerRL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <CudaLink>
+      <AdditionalDependencies>cudadevrt.lib ;cudart_static.lib </AdditionalDependencies>
+      <AdditionalOptions>-forward-unknown-to-host-compiler -Wno-deprecated-gpu-targets -D_WINDOWS -Xcompiler="/W3 /GR /EHsc" -Xcompiler="-MD  -Zi -O2 -Ob1" -DNDEBUG</AdditionalOptions>
+      <PerformDeviceLink>true</PerformDeviceLink>
+    </CudaLink>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Github\tRAcINg\CUDAPathTracerRL\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Github/tRAcINg/CUDAPathTracerRL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SE:/Github/tRAcINg/CUDAPathTracerRL -BE:/Github/tRAcINg/CUDAPathTracerRL/build --check-stamp-file E:/Github/tRAcINg/CUDAPathTracerRL/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompilerABI.cu;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDAInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\CMake\share\cmake-3.28\Modules\FindGLEW.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\SelectLibraryConfigurations.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCUDACompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCXXCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeRCCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Github/tRAcINg/CUDAPathTracerRL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SE:/Github/tRAcINg/CUDAPathTracerRL -BE:/Github/tRAcINg/CUDAPathTracerRL/build --check-stamp-file E:/Github/tRAcINg/CUDAPathTracerRL/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompilerABI.cu;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDAInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\CMake\share\cmake-3.28\Modules\FindGLEW.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\SelectLibraryConfigurations.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCUDACompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCXXCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeRCCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/Github/tRAcINg/CUDAPathTracerRL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SE:/Github/tRAcINg/CUDAPathTracerRL -BE:/Github/tRAcINg/CUDAPathTracerRL/build --check-stamp-file E:/Github/tRAcINg/CUDAPathTracerRL/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompilerABI.cu;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDAInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\CMake\share\cmake-3.28\Modules\FindGLEW.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\SelectLibraryConfigurations.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCUDACompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCXXCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeRCCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/Github/tRAcINg/CUDAPathTracerRL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SE:/Github/tRAcINg/CUDAPathTracerRL -BE:/Github/tRAcINg/CUDAPathTracerRL/build --check-stamp-file E:/Github/tRAcINg/CUDAPathTracerRL/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDACompilerABI.cu;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCUDAInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXCompilerABI.cpp;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCUDACompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\Program Files\CMake\share\cmake-3.28\Modules\FindGLEW.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindOpenGL.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Determine-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows-NVIDIA-CUDA.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.28\Modules\SelectLibraryConfigurations.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCUDACompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeCXXCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeRCCompiler.cmake;E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\3.28.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Github\tRAcINg\CUDAPathTracerRL\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\camera.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\color.cpp" />
+    <CudaCompile Include="..\src\cudaMain.cu" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\dummy.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\gl_utils.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\main.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\material.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\quadric.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\ray.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\renderengine.cpp" />
+    <CudaCompile Include="..\src\renderengine_gpu.cu" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\shader_utils.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\sphere.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\triangle.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\vector3D.cpp" />
+    <ClCompile Include="E:\Github\tRAcINg\CUDAPathTracerRL\src\world.cpp" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\camera.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\camera_gpu.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\color.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\cuda_utils.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\cudaHeaders.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\cudaMain.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\cutil_math.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\gl_utils.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\lightsource.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\material.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\material_functions.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\object.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\pathtracer_params.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\pointlightsource.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\quadric.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\ray.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\ray_gpu.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\renderengine.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\renderengine_gpu.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\rl_helper_functions.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\scene_helper.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\shader_utils.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\sphere.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\sphere_gpu.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\structs.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\triangle.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\vector3D.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\world.h" />
+    <ClInclude Include="E:\Github\tRAcINg\CUDAPathTracerRL\include\world_gpu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="E:\Github\tRAcINg\CUDAPathTracerRL\build\ZERO_CHECK.vcxproj">
+      <Project>{8CE4DF4A-E659-3738-9ECF-ABE7E153BF49}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.4.targets" />
+  </ImportGroup>
+</Project>
