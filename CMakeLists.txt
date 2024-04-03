@@ -54,7 +54,6 @@ set(
         glog
         #nanogui
         dynet
-        pybind
 )
 
 #########################################################################
@@ -78,6 +77,7 @@ set(
         ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/ConductorBSDF.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/DielectricBSDF.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/DiffuseBSDF.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/IrradianceVolumeBSDF.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/MicrofacetBSDF.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/MirrorBSDF.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/bsdf/NormalMapBSDF.cpp
@@ -168,6 +168,7 @@ set(
         ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/ConductorBSDF.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/DielectricBSDF.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/DiffuseBSDF.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/IrradianceVolumeBSDF.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/MicrofacetBSDF.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/MirrorBSDF.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/bsdf/NormalMapBSDF.hpp
@@ -317,4 +318,4 @@ endif()
 
 #target_compile_features(WarpTest PRIVATE cxx_std_17)
 
-add_subdirectory(CUDAPathTracerRL)
+# add_subdirectory(CUDAPathTracerRL)

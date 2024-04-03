@@ -6,6 +6,8 @@
 #include <ImfStringAttribute.h>
 #include <ImfVersion.h>
 #include <ImfIO.h>
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <core\stb_image_write.h>
 
 NAMESPACE_BEGIN
 
@@ -73,9 +75,10 @@ Bitmap::Bitmap(const std::string & Filename)
 	LOG(INFO) << "Done. (Took " << ObjTimer.ElapsedString() << " and " << MemString(3 * sizeof(float) * cols() * rows()) << ")";
 }
 
-void Bitmap::Save(const std::string & Filename)
+void Bitmap::SaveEXR(const std::string & Filename)
 {
-	LOG(INFO) << "Writing a " << cols() << "x" << rows() << " OpenEXR file to \"" << Filename << "\"";
+	std::string path = Filename + ".exr";
+	LOG(INFO) << "Writing a " << cols() << "x" << rows() << " OpenEXR file to \"" << path << "\"";
 	cout.flush();
 	Timer ObjTimer;
 
@@ -99,10 +102,38 @@ void Bitmap::Save(const std::string & Filename)
 	pPtr += CompStride;
 	FrameBuffer.insert("B", Imf::Slice(Imf::FLOAT, pPtr, PixelStride, RowStride));
 
-	Imf::OutputFile File(Filename.c_str(), Header);
+	Imf::OutputFile File(path.c_str(), Header);
 	File.setFrameBuffer(FrameBuffer);
 	File.writePixels((int)(rows()));
 
+	LOG(INFO) << "Done. (Took " << ObjTimer.ElapsedString() << ")";
+}
+
+void Bitmap::SavePNG(const std::string &filename) {
+    cout << "Writing a " << cols() << "x" << rows()
+         << " PNG file to \"" << filename << "\"" << endl;
+
+    std::string path = filename + ".png";
+	Timer ObjTimer;
+
+    uint8_t *rgb8 = new uint8_t[3 * cols() * rows()];
+    uint8_t *dst = rgb8;
+    for (int i = 0; i < rows(); ++i) {
+        for (int j = 0; j < cols(); ++j) {
+            Color3f tonemapped = coeffRef(i, j).ToSRGB();
+            dst[0] = (uint8_t) Clamp(255.f * tonemapped[0], 0.f, 255.f);
+            dst[1] = (uint8_t) Clamp(255.f * tonemapped[1], 0.f, 255.f);
+            dst[2] = (uint8_t) Clamp(255.f * tonemapped[2], 0.f, 255.f);
+            dst += 3;
+        }
+    }
+
+    int ret = stbi_write_png(path.c_str(), (int) cols(), (int) rows(), 3, rgb8, 3 * (int) cols());
+    if (ret == 0) {
+        cout << "Bitmap::savePNG(): Could not save PNG file \"" << path << "%s\"" << endl;
+    }
+
+    delete[] rgb8;
 	LOG(INFO) << "Done. (Took " << ObjTimer.ElapsedString() << ")";
 }
 

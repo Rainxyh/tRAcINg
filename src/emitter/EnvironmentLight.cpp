@@ -50,7 +50,7 @@ Color3f EnvironmentLight::Sample(EmitterQueryRecord & Record, const Point2f & Sa
 
 	if (MapPdf == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	if (SinTheta != 0.0f)
@@ -59,7 +59,7 @@ Color3f EnvironmentLight::Sample(EmitterQueryRecord & Record, const Point2f & Sa
 	}
 	else
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float Phi = UV.x() * float(2.0 * M_PI);
@@ -70,7 +70,7 @@ Color3f EnvironmentLight::Sample(EmitterQueryRecord & Record, const Point2f & Sa
 	Color3f Radiance = m_pEnvironmentMap->coeff(Idx.y(), Idx.x());
 	if (!Radiance.IsValid())
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 	return Radiance * m_Scale / Record.Pdf;
 }
@@ -97,7 +97,7 @@ Color3f EnvironmentLight::Eval(const EmitterQueryRecord & Record) const
 
 	if (std::isnan(Theta) || std::isnan(Phi))
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float X = Clamp(Phi / float(2.0 * M_PI) * m_pEnvironmentMap->cols(), 0.0f, float(m_pEnvironmentMap->cols() - 1.0f));
@@ -105,7 +105,7 @@ Color3f EnvironmentLight::Eval(const EmitterQueryRecord & Record) const
 	Color3f Radiance = m_pEnvironmentMap->coeff(int(Y), int(X));
 	if (!Radiance.IsValid())
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 	return Radiance * m_Scale;
 }

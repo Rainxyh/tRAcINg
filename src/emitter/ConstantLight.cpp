@@ -24,7 +24,7 @@ Color3f ConstantLight::Sample(EmitterQueryRecord & Record, const Point2f & Sampl
 	}
 	else
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float Phi = Sample2D.x() * float(2.0 * M_PI);

@@ -8,12 +8,12 @@ NAMESPACE_BEGIN
 
 REGISTER_CLASS(WhittedIntegrator, XML_INTEGRATOR_WHITTED);
 
-WhittedIntegrator::WhittedIntegrator(const PropertyList & PropList)
+WhittedIntegrator::WhittedIntegrator(const PropertyList &PropList)
 {
 	m_Depth = uint32_t(PropList.GetInteger(XML_INTEGRATOR_WHITTED_DEPTH, DEFAULT_INTEGRATOR_WHITTED_DEPTH));
 }
 
-Color3f WhittedIntegrator::Li(const Scene * pScene, Sampler * pSampler, const Ray3f & Ray) const
+Color3f WhittedIntegrator::Li(const Scene *pScene, Sampler *pSampler, const Ray3f &Ray) const
 {
 	return LiRecursive(pScene, pSampler, Ray, 0);
 }
@@ -23,9 +23,9 @@ std::string WhittedIntegrator::ToString() const
 	return tfm::format("WhittedIntegrator[depth = %d]", m_Depth);
 }
 
-Color3f WhittedIntegrator::LiRecursive(const Scene * pScene, Sampler * pSampler, const Ray3f & Ray, uint32_t Depth) const
+Color3f WhittedIntegrator::LiRecursive(const Scene *pScene, Sampler *pSampler, const Ray3f &Ray, uint32_t Depth) const
 {
-	const Emitter * pEnvironmentEmitter = pScene->GetEnvironmentEmitter();
+	const Emitter *pEnvironmentEmitter = pScene->GetEnvironmentEmitter();
 	Color3f Background = pScene->GetBackground();
 	bool bForceBackground = pScene->GetForceBackground();
 
@@ -48,7 +48,7 @@ Color3f WhittedIntegrator::LiRecursive(const Scene * pScene, Sampler * pSampler,
 			}
 			else
 			{
-				return Color3f(0.0f);
+				return BLACK;
 			}
 		}
 	}
@@ -65,11 +65,11 @@ Color3f WhittedIntegrator::LiRecursive(const Scene * pScene, Sampler * pSampler,
 	}
 
 	Color3f Lr(0.0f);
-	const BSDF * pBSDF = Isect.pBSDF;
+	const BSDF *pBSDF = Isect.pBSDF;
 
 	if (pBSDF->IsDiffuse())
 	{
-		for (Emitter * pEmitter : pScene->GetEmitters())
+		for (Emitter *pEmitter : pScene->GetEmitters())
 		{
 			if (pEmitter == Isect.pEmitter)
 			{
@@ -101,6 +101,14 @@ Color3f WhittedIntegrator::LiRecursive(const Scene * pScene, Sampler * pSampler,
 				}
 			}
 		}
+	}
+	else if (pBSDF->IsIrradianceVolume())
+	{
+		BSDFQueryRecord BSDFRecord(Isect.ToLocal(-1.0f * Ray.Direction), ETransportMode::ERadiance, pSampler, Isect);
+		Color3f C = pBSDF->Sample(BSDFRecord, pSampler->Next2D());
+		Lr = C;
+		// Irradiance Volume does not block the transmission of light
+		LiRecursive(pScene, pSampler, Ray3f(Isect.P, Ray.Direction), Depth);
 	}
 	else
 	{

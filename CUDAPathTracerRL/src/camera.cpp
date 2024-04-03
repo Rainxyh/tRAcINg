@@ -26,7 +26,7 @@ Camera::Camera(const Vector3D &_pos, const Vector3D &_target, const Vector3D &_u
 	aspect = float(width) / float(height);
 	focalWidth = focalHeight * aspect;										   // Height * Aspect ratio
 	focalDistance = focalHeight / (2.0f * tan(fovy * M_PI / (180.0f * 2.0f))); // More the fovy, close is focal plane
-	printf("%f %f %f %f %f %f %f \n", aspect, u.X(), u.Y(), u.Z(), v.X(), v.Y(), v.Z());
+	// printf("cam: aspect:%f %f %f %f %f %f %f \n", aspect, u.X(), u.Y(), u.Z(), v.X(), v.Y(), v.Z());
 }
 
 Camera::~Camera()

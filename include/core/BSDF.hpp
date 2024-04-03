@@ -2,6 +2,7 @@
 
 #include <core\Common.hpp>
 #include <core\Object.hpp>
+#include <core\Intersection.hpp>
 #include <initializer_list>
 
 NAMESPACE_BEGIN
@@ -108,6 +109,11 @@ public:
 	* or not to store photons on a surface
 	*/
 	virtual bool IsDiffuse() const;
+
+	/**
+	* \brief Return whether or not this BRDF is irradiance volume.
+	*/
+	virtual bool IsIrradianceVolume() const;
 
 	/**
 	* \brief Return whether or not this BRDF is anisotropic. 

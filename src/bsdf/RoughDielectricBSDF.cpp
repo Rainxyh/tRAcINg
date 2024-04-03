@@ -61,7 +61,7 @@ Color3f RoughDielectricBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sa
 
 	if (CosThetaI == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float AlphaU = Clamp(m_pAlphaU->Eval(Record.Isect)[0], float(MIN_ALPHA), float(MAX_ALPHA));
@@ -82,7 +82,7 @@ Color3f RoughDielectricBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sa
 
 	if (Pdf == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float CosThetaT;
@@ -120,7 +120,7 @@ Color3f RoughDielectricBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sa
 		float CosThetaO = Frame::CosTheta(Record.Wo);
 		if (CosThetaO * CosThetaI <= 0.0f)
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		W *= m_pKsReflect->Eval(Record.Isect);
@@ -129,7 +129,7 @@ Color3f RoughDielectricBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sa
 	{
 		if (CosThetaT == 0.0f)
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		/* Perfect specular transmission based on the microfacet normal */
@@ -139,7 +139,7 @@ Color3f RoughDielectricBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sa
 		float CosThetaO = Frame::CosTheta(Record.Wo);
 		if (CosThetaO * CosThetaI >= 0.0f)
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		float Factor = (Record.Mode == ETransportMode::ERadiance) ? (CosThetaT < 0.0f ? m_InvEta : m_Eta) : 1.0f;
@@ -158,7 +158,7 @@ Color3f RoughDielectricBSDF::Eval(const BSDFQueryRecord & Record) const
 
 	if (Record.Measure != EMeasure::ESolidAngle || CosThetaI == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	/* Determine the type of interaction */
@@ -192,7 +192,7 @@ Color3f RoughDielectricBSDF::Eval(const BSDFQueryRecord & Record) const
 
 	if (D == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float CosThetaT;

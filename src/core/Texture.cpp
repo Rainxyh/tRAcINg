@@ -103,7 +103,7 @@ std::unique_ptr<Color3f[]> LoadImageFromFileRGB(
 
 	Color3f Maximum = Color3f(std::numeric_limits<float>::min());
 	Color3f Minimum = Color3f(std::numeric_limits<float>::max());
-	Color3f Average = Color3f(0.0f);
+	Color3f Average = BLACK;
 
 	for (int x = 0; x < Width; x++)
 	{
@@ -459,7 +459,7 @@ Color3f Color3fProductTexture::Eval(const Intersection & Isect, bool bFilter) co
 Color3f Color3fProductTexture::GetAverage() const
 {
 	LOG(ERROR) << "Color3fProductTexture::GetAverage() - information unavailable!";
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 Color3f Color3fProductTexture::GetMinimum() const

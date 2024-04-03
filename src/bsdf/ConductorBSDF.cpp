@@ -37,7 +37,7 @@ Color3f ConductorBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) 
 
 	if (CosThetaI <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Color3f FresnelTerm = FresnelConductor(CosThetaI, m_Eta, m_EtaK);
@@ -59,7 +59,7 @@ Color3f ConductorBSDF::Eval(const BSDFQueryRecord & Record) const
 		return m_pKs->Eval(Record.Isect) * FresnelConductor(CosThetaI, m_Eta, m_EtaK);
 	}
 
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 float ConductorBSDF::Pdf(const BSDFQueryRecord & Record) const

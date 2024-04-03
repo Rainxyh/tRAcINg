@@ -13,7 +13,7 @@ Color3f MirrorBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) con
 {
 	if (Frame::CosTheta(Record.Wi) <= 0)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	// Reflection in local coordinates
@@ -23,7 +23,7 @@ Color3f MirrorBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) con
 	/* Relative index of refraction: no change */
 	Record.Eta = 1.0f;
 	
-	return Color3f(1.0f);
+	return WHITE;
 }
 
 Color3f MirrorBSDF::Eval(const BSDFQueryRecord & Record) const
@@ -34,24 +34,15 @@ Color3f MirrorBSDF::Eval(const BSDFQueryRecord & Record) const
 	if (CosThetaI > 0.0f && CosThetaO > 0.0f && Record.Measure == EMeasure::EDiscrete &&
 		std::abs(Reflect(Record.Wi).dot(Record.Wo) - 1.0f) <= DeltaEpsilon)
 	{
-		return Color3f(1.0f);
+		return WHITE;
 	}
 
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 float MirrorBSDF::Pdf(const BSDFQueryRecord & Record) const
 {
-	float CosThetaI = Frame::CosTheta(Record.Wi);
-	float CosThetaO = Frame::CosTheta(Record.Wo);
-
-	if (CosThetaI > 0.0f && CosThetaO > 0.0f && Record.Measure == EMeasure::EDiscrete &&
-		std::abs(Reflect(Record.Wi).dot(Record.Wo) - 1.0f) <= DeltaEpsilon)
-	{
-		return 1.0f;
-	}
-
-	return 0.0f;
+	return 1.0f;
 }
 
 void MirrorBSDF::Activate()

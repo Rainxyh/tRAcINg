@@ -75,7 +75,7 @@ __device__ __inline__ inline float3 shadeDiffuse(Ray_GPU &ray, int &seed)
     return normalize(u * cos(alpha) * sineTheta + v * sin(alpha) * sineTheta + w * sqrt(z));
 }
 
-#define DEBUG 0
+#define DEBUG true
 
 __device__ float3 computeColor(Ray_GPU &ray, int &seed, World_GPU &wor, QNode *&q_table, unsigned int &steps)
 {
@@ -95,9 +95,8 @@ __device__ float3 computeColor(Ray_GPU &ray, int &seed, World_GPU &wor, QNode *&
         q_index = getQIndex(ray.orig);
         dir_oct = getDirectionOctant(ray.dir);
         //        c = make_float3((floor(ray.orig.x) + MAX_COORD)/(MAX_COORD*2), (floor(ray.orig.y) + MAX_COORD)/(MAX_COORD*2), (floor(ray.orig.z) + MAX_COORD)/(MAX_COORD*2));
-        if (DEBUG && !i)
-            c_q_table = make_float3(q_table[q_index].max);
-//        if(DEBUG && !i) c_q_table = (ray.dir);
+        // if (DEBUG && !i) c_q_table = make_float3(q_table[q_index].max);
+    //    if(DEBUG && !i) c_q_table = (ray.dir);
 #endif
         //        break;
         if (sphere ^ 255)
@@ -145,22 +144,25 @@ __device__ float3 computeColor(Ray_GPU &ray, int &seed, World_GPU &wor, QNode *&
                     if (steps > 3 && i)
                         for (int li = 0; li < 8; li++)
                         {
-                            //                        if(DEBUG && !i) c_q_table = make_float3(0.f);
+                            if (DEBUG && !i) c_q_table = make_float3(0.f);
                             direction = shadeDiffuse(ray, seed);
                             t_index = getDirectionOctant(direction);
                             if (q.v[t_index] > 0.75 * q.max)
                             {
-                                //                            if(DEBUG && !i) c_q_table = make_float3(t_index/7.f);
+                                if (DEBUG && !i) c_q_table = make_float3(t_index / 7.f);
                                 break;
                             }
                         }
                     else
                         direction = shadeDiffuse(ray, seed);
 
-                    //                    if(DEBUG && !i) for(int li=0;li<8;li++){
-                    //                        if(q.v[li] > 0.75*q.max)
-                    //                            c_q_table = make_float3(li&4?1:0, li&2?1:0, li&1?1:0);
-                    //                    }
+                    if (DEBUG && !i)
+                        for (int li = 0; li < 8; li++)
+                        {
+                            if (q.v[li] > 0.75 * q.max)
+                                c_q_table = make_float3(li & 4 ? 1 : 0, li & 2 ? 1 : 0, li & 1 ? 1 : 0);
+                        }
+
                     ray.dir = direction;
 #else
                     ray.dir = shadeDiffuse(ray, seed);
@@ -176,7 +178,15 @@ __device__ float3 computeColor(Ray_GPU &ray, int &seed, World_GPU &wor, QNode *&
         }
         if (length(c) < 0.07)
             break;
+        float tileSize 	= 0.12;
+        float3 phiTheta	= (ray.dir+1.)/2.;
+        float3 tileId 	= floor( phiTheta / tileSize );
+        float3 color = make_float3(1./(tileId.x+1),1./(tileId.y+1),1./(tileId.z+1));
+        float3 tilePos	= ( phiTheta - tileId * tileSize ) / tileSize;
+        // return color;
     }
+
+
     return DEBUG ? c_q_table : isL ? c
                                    : make_float3(0);
 }

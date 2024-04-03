@@ -98,7 +98,7 @@ Color3f PerspectiveCamera::SampleRay(Ray3f & Ray, const Point2f & SamplePosition
 	Ray.bHasDifferentials = true;
 	Ray.Update();
 
-	return Color3f(1.0f);
+	return WHITE;
 }
 
 void PerspectiveCamera::AddChild(Object * pChildObj, const std::string & Name)

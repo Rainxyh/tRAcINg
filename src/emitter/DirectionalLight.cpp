@@ -33,7 +33,7 @@ float DirectionalLight::Pdf(const EmitterQueryRecord & Record) const
 
 Color3f DirectionalLight::Eval(const EmitterQueryRecord & Record) const
 {
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 std::string DirectionalLight::ToString() const

@@ -35,7 +35,7 @@ Color3f MicrofacetBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample)
 {
 	if (Frame::CosTheta(Record.Wi) <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Record.Measure = EMeasure::ESolidAngle;
@@ -72,7 +72,7 @@ Color3f MicrofacetBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample)
 	float PDF = Pdf(Record);
 	if (PDF == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float CosThetaT;
@@ -85,7 +85,7 @@ Color3f MicrofacetBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample)
 	Color3f SpecularTerm = Ks * F * D * G / (4.0f * Frame::CosTheta(Record.Wi) * Frame::CosTheta(Record.Wo));
 	if (!SpecularTerm.IsValid())
 	{
-		SpecularTerm = Color3f(0.0f);
+		SpecularTerm = BLACK;
 	}
 
 	Color3f DiffuseTerm = Kd / float(M_PI);
@@ -100,7 +100,7 @@ Color3f MicrofacetBSDF::Eval(const BSDFQueryRecord & Record) const
 		Frame::CosTheta(Record.Wo) <= 0.0f
 		)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float Alpha = Clamp(m_pAlpha->Eval(Record.Isect)[0], float(MIN_ALPHA), float(MAX_ALPHA));
@@ -127,7 +127,7 @@ Color3f MicrofacetBSDF::Eval(const BSDFQueryRecord & Record) const
 	Color3f SpecularTerm = Ks * F * D * G / (4.0f * Frame::CosTheta(Record.Wi) * Frame::CosTheta(Record.Wo));
 	if (!SpecularTerm.IsValid())
 	{
-		SpecularTerm = Color3f(0.0f);
+		SpecularTerm = BLACK;
 	}
 
 	Color3f DiffuseTerm = Kd / float(M_PI);

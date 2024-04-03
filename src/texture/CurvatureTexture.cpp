@@ -46,7 +46,7 @@ Color3f CurvatureTexture::Eval(const Intersection & Isect, bool bFilter) const
 		{
 			return std::min(Value * m_Scale, 1.0f) * m_PositiveColor;
 		}
-		return Color3f(0.0f);
+		return BLACK;
 	};
 
 	return LookUpColor(m_bGaussianCurvature ? K : H);
@@ -61,13 +61,13 @@ Color3f CurvatureTexture::GetAverage() const
 Color3f CurvatureTexture::GetMinimum() const
 {
 	LOG(WARNING) << "CurvatureTexture::GetMaximum() - information meaningless!";
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 Color3f CurvatureTexture::GetMaximum() const
 {
 	LOG(WARNING) << "CurvatureTexture::GetMaximum() - information meaningless!";
-	return Color3f(1.0f);
+	return WHITE;
 }
 
 Vector3i CurvatureTexture::GetDimension() const

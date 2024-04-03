@@ -1,6 +1,7 @@
 #include <integrator\SimpleIntegrator.hpp>
 #include <core\Mesh.hpp>
 #include <core\Scene.hpp>
+#include <iostream>
 
 NAMESPACE_BEGIN
 
@@ -18,13 +19,13 @@ Color3f SimpleIntegrator::Li(const Scene * pScene, Sampler * pSampler, const Ray
 	Intersection Isect;
 	if (!pScene->RayIntersect(Ray, Isect))
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Ray3f ShadowRay = Isect.SpawnShadowRay(m_Position);
 	if (pScene->ShadowRayIntersect(ShadowRay))
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float CosTheta = Frame::CosTheta(Isect.ShadingFrame.ToLocal(ShadowRay.Direction).normalized());

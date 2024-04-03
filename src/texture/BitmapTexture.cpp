@@ -155,8 +155,8 @@ void BitmapTexture::EvalGradient(const Point2f & UV, Color3f * pGradients) const
 		}
 		else
 		{
-			pGradients[0] = Color3f(0.0f);
-			pGradients[1] = Color3f(0.0f);
+			pGradients[0] = BLACK;
+			pGradients[1] = BLACK;
 		}
 	}
 	else //if (m_Channel == 3)
@@ -167,8 +167,8 @@ void BitmapTexture::EvalGradient(const Point2f & UV, Color3f * pGradients) const
 		}
 		else
 		{
-			pGradients[0] = Color3f(0.0f);
-			pGradients[1] = Color3f(0.0f);
+			pGradients[0] = BLACK;
+			pGradients[1] = BLACK;
 		}
 	}
 }

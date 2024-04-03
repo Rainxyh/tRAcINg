@@ -82,7 +82,7 @@ Color3f DielectricBSDF::Eval(const BSDFQueryRecord & Record) const
 		}
 	}
 
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 float DielectricBSDF::Pdf(const BSDFQueryRecord & Record) const

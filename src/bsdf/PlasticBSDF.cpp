@@ -44,7 +44,7 @@ Color3f PlasticBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 
 	if (CosThetaI <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float CosThetaT;
@@ -73,7 +73,7 @@ Color3f PlasticBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 		Color3f Diffuse = m_pKd->Eval(Record.Isect);
 		if (m_bNonlinear)
 		{
-			Diffuse /= (Color3f(1.0f) - Diffuse * m_FresnelDiffuseReflectanceInt);
+			Diffuse /= (WHITE - Diffuse * m_FresnelDiffuseReflectanceInt);
 		}
 		else
 		{
@@ -92,7 +92,7 @@ Color3f PlasticBSDF::Eval(const BSDFQueryRecord & Record) const
 		CosThetaI <= 0.0f ||
 		CosThetaO <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	bool bSpecular = (Record.Measure == EMeasure::EDiscrete);
@@ -107,7 +107,7 @@ Color3f PlasticBSDF::Eval(const BSDFQueryRecord & Record) const
 			return m_pKs->Eval(Record.Isect) * FresnelTermI;
 		}
 
-		return Color3f(0.0f);
+		return BLACK;
 	}
 	else
 	{
@@ -115,7 +115,7 @@ Color3f PlasticBSDF::Eval(const BSDFQueryRecord & Record) const
 		Color3f Diffuse = m_pKd->Eval(Record.Isect);
 		if (m_bNonlinear)
 		{
-			Diffuse /= (Color3f(1.0f) - Diffuse * m_FresnelDiffuseReflectanceInt);
+			Diffuse /= (WHITE - Diffuse * m_FresnelDiffuseReflectanceInt);
 		}
 		else
 		{

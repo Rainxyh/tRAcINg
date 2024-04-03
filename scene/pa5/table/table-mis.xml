@@ -3,7 +3,7 @@
 <scene>
 	<!-- Independent sample generator, 512 samples per pixel -->
 	<sampler type="independent">
-		<integer name="sampleCount" value="512"/>
+		<integer name="sampleCount" value="2048"/>
 	</sampler>
 
 	<acceleration type="hlbvh">

@@ -70,7 +70,7 @@ Color3f CoatingBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 	{
 		if (R12 == 1.0f)
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		Vector3f WiBackup = Record.Wi;
@@ -80,7 +80,7 @@ Color3f CoatingBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 
 		if (Result.isZero())
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		Vector3f WoPrime = Record.Wo;
@@ -98,7 +98,7 @@ Color3f CoatingBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 		if (R21 == 1.0f)
 		{
 			/* Total internal reflectance */
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		Result /= (1.0f - SpecularPDF);
@@ -117,7 +117,7 @@ Color3f CoatingBSDF::Eval(const BSDFQueryRecord & Record) const
 			float CosThetaT;
 			return m_pKs->Eval(Record.Isect) * FresnelDielectric(std::abs(Frame::CosTheta(Record.Wi)), m_Eta, m_InvEta, CosThetaT);
 		}
-		return Color3f(0.0f);
+		return BLACK;
 	}
 	else
 	{
@@ -129,7 +129,7 @@ Color3f CoatingBSDF::Eval(const BSDFQueryRecord & Record) const
 		if (R12 == 1.0f || R21 == 1.0f)
 		{
 			/* Total internal reflection */
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		Color3f Result = m_pNestedBSDF->Eval(RecordInt) * (1.0f - R12) * (1.0f - R21);

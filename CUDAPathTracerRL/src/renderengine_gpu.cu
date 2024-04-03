@@ -82,7 +82,7 @@ bool RenderEngine_GPU::renderLoop()
     {
         i = 0;
         steps++;
-        printf("GPU Time: %fms, %fms; steps: %d; Total Time: %f; SPP: %d; Rays: %d\n", kernelTime, time - kernelTime, steps, totalTime, 64 * (steps + 1), 64 * (steps + 1) * cam.size.x * cam.size.y);
+        printf("GPU Time: %fms, %fms; steps: %d; Total Time: %f;\n", kernelTime, time - kernelTime, steps, totalTime);
         camera->incSteps();
         return totalTime > 10 * 1000; // break after 30sec
     }
@@ -97,7 +97,7 @@ RenderEngine_GPU::~RenderEngine_GPU()
     cudaFree(q_table_device);
     free(random_texture);
 }
-
+int last;
 __global__ void Main_Render_Kernel(int startI, unsigned char *bitmap, Camera_GPU cam, World_GPU wor, unsigned int steps,
                                    int *rand_tex, int clk, QNode *q_table)
 { // j->row, i->column
@@ -120,24 +120,31 @@ __global__ void Main_Render_Kernel(int startI, unsigned char *bitmap, Camera_GPU
 
     // Create ray
     Ray_GPU ray(cam.pos, dir);
-    float3 c = computeColor(ray, seed, wor, q_table, steps);
 
-    c = warpAddColors(c);
+    float3 color = computeColor(ray, seed, wor, q_table, steps);
+
+    color = warpAddColors(color);
     __shared__ float3 val[MAX_THREADS_IN_BLOCK / (SAMPLE * SAMPLE)];
     val[threadIdx.z] = make_float3(1, 0, 0);
     __syncthreads();
     if (p == SAMPLE - 1 && q == SAMPLE - 1)
-        val[threadIdx.z] = c;
+        val[threadIdx.z] = color;
     __syncthreads();
 
     if (p == 0 && q == 0)
     {
-        c = c + val[threadIdx.z];
-        c = clamp(c / (SAMPLE * SAMPLE), 0, 1);
+        color = color + val[threadIdx.z];
+        color = clamp(color / (SAMPLE * SAMPLE), 0, 1);
         int index = (i + j * cam.size.x) * 3;
         float f = 1.0f / (steps + 1);
-        bitmap[index + 0] = (unsigned char)((bitmap[index + 0] * (f * steps) + 255 * c.x * f));
-        bitmap[index + 1] = (unsigned char)((bitmap[index + 1] * (f * steps) + 255 * c.y * f));
-        bitmap[index + 2] = (unsigned char)((bitmap[index + 2] * (f * steps) + 255 * c.z * f));
+        // if (255 * color.x > bitmap[index + 0])
+        // bitmap[index + 0] = (unsigned char)((bitmap[index + 0] * (f * steps) + 255 * color.x * f));
+        // if (255 * color.y > bitmap[index + 1])
+        // bitmap[index + 1] = (unsigned char)((bitmap[index + 1] * (f * steps) + 255 * color.y * f));
+        // if (255 * color.z > bitmap[index + 2])
+        // bitmap[index + 2] = (unsigned char)((bitmap[index + 2] * (f * steps) + 255 * color.z * f));
+        bitmap[index + 0] = (unsigned char)((bitmap[index + 0] + 255 * color.x)/2);
+        bitmap[index + 1] = (unsigned char)((bitmap[index + 1] + 255 * color.y)/2);
+        bitmap[index + 2] = (unsigned char)((bitmap[index + 2] + 255 * color.z)/2);
     }
 }

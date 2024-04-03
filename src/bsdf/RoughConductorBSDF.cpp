@@ -58,7 +58,7 @@ Color3f RoughConductorBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sam
 	float CosThetaI = Frame::CosTheta(Record.Wi);
 	if (CosThetaI <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float AlphaU = Clamp(m_pAlphaU->Eval(Record.Isect)[0], float(MIN_ALPHA), float(MAX_ALPHA));
@@ -74,7 +74,7 @@ Color3f RoughConductorBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sam
 
 	if (Pdf == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Record.Wo = Reflect(Record.Wi, M);
@@ -82,7 +82,7 @@ Color3f RoughConductorBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sam
 
 	if (Frame::CosTheta(Record.Wo) < 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float MDotWi = M.dot(Record.Wi);
@@ -100,7 +100,7 @@ Color3f RoughConductorBSDF::Eval(const BSDFQueryRecord & Record) const
 		CosThetaI <= 0.0f ||
 		CosThetaO <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	/* Calculate the reflection half-vector */
@@ -118,7 +118,7 @@ Color3f RoughConductorBSDF::Eval(const BSDFQueryRecord & Record) const
 
 	if (D == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Color3f F = FresnelConductor(H.dot(Record.Wi), m_Eta, m_EtaK) * m_pKs->Eval(Record.Isect);

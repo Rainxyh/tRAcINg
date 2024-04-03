@@ -33,7 +33,7 @@ Color3f BumpMapBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 
 	if (Frame::CosTheta(Record.Wi) * Frame::CosTheta(PerturbedRecord.Wi) <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Color3f Result = m_pNestedBSDF->Sample(PerturbedRecord, Sample);
@@ -46,7 +46,7 @@ Color3f BumpMapBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 
 		if (Frame::CosTheta(Record.Wo) * Frame::CosTheta(PerturbedRecord.Wo) <= 0.0f)
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 	}
 
@@ -70,7 +70,7 @@ Color3f BumpMapBSDF::Eval(const BSDFQueryRecord & Record) const
 	if (Frame::CosTheta(Record.Wo) * Frame::CosTheta(PerturbedRecord.Wo) <= 0.0f ||
 		Frame::CosTheta(Record.Wi) * Frame::CosTheta(PerturbedRecord.Wi) <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	return m_pNestedBSDF->Eval(PerturbedRecord);

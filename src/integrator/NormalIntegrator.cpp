@@ -17,7 +17,7 @@ Color3f NormalIntegrator::Li(const Scene * pScene, Sampler * pSampler, const Ray
 	Intersection Isect;
 	if (!pScene->RayIntersect(Ray, Isect))
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	/* Return the component-wise absolute value of the shading normal as a color */

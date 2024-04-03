@@ -29,7 +29,7 @@ Color3f AreaLight::Sample(EmitterQueryRecord & Record, const Point2f & Sample2D,
 
 	if (Record.Pdf == 0.0f || std::isinf(Record.Pdf))
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	return Eval(Record) / Record.Pdf;
@@ -70,7 +70,7 @@ Color3f AreaLight::Eval(const EmitterQueryRecord & Record) const
 		return m_Radiance;
 	}
 
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 void AreaLight::SetParent(Object * pParentObj, const std::string & Name)

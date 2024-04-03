@@ -69,7 +69,7 @@ Color3f RoughPlasticBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sampl
 
 	if (CosThetaI <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Point2f Sample2D(Sample);
@@ -115,7 +115,7 @@ Color3f RoughPlasticBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sampl
 
 	if (PDF == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 	else
 	{
@@ -131,7 +131,7 @@ Color3f RoughPlasticBSDF::Eval(const BSDFQueryRecord & Record) const
 	if (Record.Measure == EMeasure::EUnknownMeasure || 
 		CosThetaI <= 0.0f || CosThetaO <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	float Alpha = Clamp(m_pAlpha->Eval(Record.Isect)[0], float(MIN_ALPHA), float(MAX_ALPHA));
@@ -154,7 +154,7 @@ Color3f RoughPlasticBSDF::Eval(const BSDFQueryRecord & Record) const
 
 	if (m_bNonlinear)
 	{
-		Diffuse /= (Color3f(1.0f) - Diffuse * FDR);
+		Diffuse /= (WHITE - Diffuse * FDR);
 	}
 	else
 	{

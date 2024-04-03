@@ -197,6 +197,7 @@
 #define XML_BSDF_DIELECTRIC_KS_REFRACT           "ksRefract"
 #define XML_BSDF_DIFFUSE                         "diffuse"
 #define XML_BSDF_DIFFUSE_ALBEDO                  "albedo"
+#define XML_BSDF_IRRADIANCEVOLUME                "irradianceVolume"
 #define XML_BSDF_MIRROR                          "mirror"
 #define XML_BSDF_MICROFACET                      "microfacet"
 #define XML_BSDF_MICROFACET_ALPHA                "alpha"
@@ -379,12 +380,12 @@
 #define DEFAULT_BSDF_COATING_INT_IOR               1.49f
 #define DEFAULT_BSDF_COATING_EXT_IOR               1.000277f /* Air */
 #define DEFAULT_BSDF_COATING_THICKNESS             1.0f
-#define DEFAULT_BSDF_COATING_SIGMA_A               Color3f(0.0f)
+#define DEFAULT_BSDF_COATING_SIGMA_A               BLACK
 #define DEFAULT_BSDF_COATING_KS                    Color3f(1.0f)
 #define DEFAULT_BSDF_ROUGH_COATING_INT_IOR         1.49f
 #define DEFAULT_BSDF_ROUGH_COATING_EXT_IOR         1.000277f /* Air */
 #define DEFAULT_BSDF_ROUGH_COATING_THICKNESS       1.0f
-#define DEFAULT_BSDF_ROUGH_COATING_SIGMA_A         Color3f(0.0f)
+#define DEFAULT_BSDF_ROUGH_COATING_SIGMA_A         BLACK
 #define DEFAULT_BSDF_ROUGH_COATING_KS              Color3f(1.0f)
 #define DEFAULT_BSDF_ROUGH_COATING_ALPHA           0.1f
 #define DEFAULT_BSDF_ROUGH_COATING_TYPE            XML_BSDF_BECKMANN
@@ -419,7 +420,7 @@
 #define DEFAULT_TEST_CHI2_SAMPLE_COUNT             -1
 #define DEFAULT_TEST_CHI2_TEST_COUNT               5
 
-#define DEFAULT_SCENE_BACKGROUND                   Color3f(0.0f)
+#define DEFAULT_SCENE_BACKGROUND                   BLACK
 #define DEFAULT_SCENE_FORCE_BACKGROUND             false
 
 #define DEFAULT_TEXTURE_BITMAP_GAMMA               1.0f

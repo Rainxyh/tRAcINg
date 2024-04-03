@@ -116,7 +116,7 @@ Color3f Color4f::DivideByFilterWeight() const
 	}
 	else
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 }
 

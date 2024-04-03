@@ -94,7 +94,7 @@ Color3f RoughCoatingBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sampl
 
 		if (Frame::CosTheta(Record.Wo) * Frame::CosTheta(Record.Wo) <= 0.0f)
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 	}
 	else
@@ -106,21 +106,21 @@ Color3f RoughCoatingBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sampl
 
 		if (Result.isZero())
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		Record.Wo = RefractOut(Record.Wo);
 
 		if (Record.Wo.isZero())
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 	}
 
 	float PDF = Pdf(Record);
 	if (PDF == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	return Eval(Record) / PDF;
@@ -133,7 +133,7 @@ Color3f RoughCoatingBSDF::Eval(const BSDFQueryRecord & Record) const
 
 	if (CosThetaI * CosThetaO <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Color3f Result(0.0f);

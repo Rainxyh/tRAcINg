@@ -3,12 +3,12 @@
 		<integer name="leafSize" value="10"/>
 	</acceleration>
 
-	<integrator type="pathMIS">
+	<integrator type="pathMATS">
 		<integer name="depth" value="32"/>
 	</integrator>
 	
 	<sampler type="independent">
-		<integer name="sampleCount" value="32"/>
+		<integer name="sampleCount" value="128"/>
 	</sampler>
 
 	<camera type="perspective">

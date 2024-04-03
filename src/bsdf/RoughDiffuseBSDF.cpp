@@ -32,7 +32,7 @@ Color3f RoughDiffuseBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sampl
 
 	if (CosThetaI <= 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Record.Wo = Sampling::SquareToCosineHemisphere(Sample);
@@ -42,7 +42,7 @@ Color3f RoughDiffuseBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sampl
 
 	if (Pdf == 0.0f)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	return Eval(Record) / Pdf;
@@ -55,7 +55,7 @@ Color3f RoughDiffuseBSDF::Eval(const BSDFQueryRecord & Record) const
 
 	if (CosThetaI <= 0.0f || CosThetaO <= 0.0f || Record.Measure != EMeasure::ESolidAngle)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	/* Conversion from Beckmann-style RMS roughness to
@@ -147,7 +147,7 @@ Color3f RoughDiffuseBSDF::Eval(const BSDFQueryRecord & Record) const
 
 		if (std::isinf(TanHalf) || std::isnan(TanHalf))
 		{
-			return Color3f(0.0f);
+			return BLACK;
 		}
 
 		Color3f Rho = m_pAlbedo->Eval(Record.Isect);

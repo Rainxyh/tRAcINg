@@ -8,10 +8,10 @@ NAMESPACE_BEGIN
 
 static std::mutex Lock;
 
-static void RenderBlock(const Scene * pScene, Sampler * pSampler, ImageBlock & Block)
+static void RenderBlock(const Scene *pScene, Sampler *pSampler, ImageBlock &Block)
 {
-	const Camera * pCamera = pScene->GetCamera();
-	const Integrator * pIntegrator = pScene->GetIntegrator();
+	const Camera *pCamera = pScene->GetCamera();
+	const Integrator *pIntegrator = pScene->GetIntegrator();
 
 	Point2i Offset = Block.GetOffset();
 	Vector2i Size = Block.GetSize();
@@ -43,9 +43,9 @@ static void RenderBlock(const Scene * pScene, Sampler * pSampler, ImageBlock & B
 	}
 }
 
-static void Render(Scene * pScene, const std::string & Filename) 
+static void Render(Scene *pScene, const std::string &Filename)
 {
-	const Camera * pCamera = pScene->GetCamera();
+	const Camera *pCamera = pScene->GetCamera();
 	Vector2i OutputSize = pCamera->GetOutputSize();
 	pScene->GetIntegrator()->Preprocess(pScene);
 
@@ -61,13 +61,13 @@ static void Render(Scene * pScene, const std::string & Filename)
 
 	/* Create a window that visualizes the partially rendered result */
 	std::unique_ptr<Screen> pScreen(new Screen(Result));
-	std::vector<const ImageBlock *> & RenderingBlocks = pScreen->GetRenderingBlocks();
-	float & Progress = pScreen->GetProgress();
-	std::string & RenderTimeString = pScreen->GetRenderTimeString();;
+	std::vector<const ImageBlock *> &RenderingBlocks = pScreen->GetRenderingBlocks();
+	float &Progress = pScreen->GetProgress();
+	std::string &RenderTimeString = pScreen->GetRenderTimeString();
 
 	/* Do the following in parallel and asynchronously */
 	std::thread RenderThread([&]
-	{
+							 {
 		LOG(INFO) << "Rendering ... ";
 		Timer RenderTimer;
 
@@ -120,8 +120,7 @@ static void Render(Scene * pScene, const std::string & Filename)
 		/// Default: parallel rendering
 		tbb::parallel_for(Range, Map);
 
-		LOG(INFO) << "Done. (took " << RenderTimer.ElapsedString() << ")";
-	});
+		LOG(INFO) << "Done. (took " << RenderTimer.ElapsedString() << ")"; });
 
 	/* Enter the application main loop */
 	pScreen->Draw();
@@ -140,15 +139,18 @@ static void Render(Scene * pScene, const std::string & Filename)
 	{
 		OutputName.erase(iLastDot, std::string::npos);
 	}
-	OutputName += ".exr";
+	OutputName += "_" + std::to_string(pScene->GetSampler()->GetSampleCount());
 
 	/* Save using the OpenEXR format */
-	pBitmap->Save(OutputName);
+	// pBitmap->SaveEXR(OutputName);
+
+	/* Save tonemapped (sRGB) output using the PNG format */
+	pBitmap->SavePNG(OutputName);
 }
 
 NAMESPACE_END
 
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
 	google::InitGoogleLogging("Rain");
 	google::SetStderrLogging(google::GLOG_INFO);
@@ -192,7 +194,7 @@ int main(int argc, char ** argv)
 			LOG(ERROR) << "Fatal error: unknown file \"" << argv[1] << "\", expected an extension of type .xml or .exr";
 		}
 	}
-	catch (const std::exception & Ex)
+	catch (const std::exception &Ex)
 	{
 		LOG(ERROR) << "Fatal error: " << Ex.what();
 	}
@@ -203,4 +205,3 @@ int main(int argc, char ** argv)
 	system("PAUSE");
 	return 0;
 }
-

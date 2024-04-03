@@ -21,7 +21,7 @@ Color3f DiffuseBSDF::Sample(BSDFQueryRecord & Record, const Point2f & Sample) co
 {
 	if (Frame::CosTheta(Record.Wi) <= 0)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Record.Measure = EMeasure::ESolidAngle;
@@ -44,7 +44,7 @@ Color3f DiffuseBSDF::Eval(const BSDFQueryRecord & Record) const
 	is wrong, or when queried for illumination on the backside */
 	if (Record.Measure != EMeasure::ESolidAngle || Frame::CosTheta(Record.Wi) <= 0 || Frame::CosTheta(Record.Wo) <= 0)
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	/* The BRDF is simply the albedo / pi */

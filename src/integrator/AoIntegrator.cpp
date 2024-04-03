@@ -22,7 +22,7 @@ Color3f AoIntegrator::Li(const Scene * pScene, Sampler * pSampler, const Ray3f &
 	Intersection Isect;
 	if (!pScene->RayIntersect(Ray, Isect))
 	{
-		return Color3f(0.0f);
+		return BLACK;
 	}
 
 	Color3f Li(0.0f);
@@ -41,7 +41,7 @@ Color3f AoIntegrator::Li(const Scene * pScene, Sampler * pSampler, const Ray3f &
 
 		if (!pScene->ShadowRayIntersect(AoRay))
 		{
-			Li += Color3f(1.0f);
+			Li += WHITE;
 		}
 	}
 

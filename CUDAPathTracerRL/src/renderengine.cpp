@@ -33,7 +33,7 @@ bool RenderEngine::renderLoop()
 		color.clamp();
 		camera->drawPixel(i, j, color);
 	}
-	printf("CPU Time: %fms, steps: %d\n", 1000 * (double)(clock() - cl) / CLOCKS_PER_SEC, i);
+	printf("CPU Time: %fms; steps: %d\n", 1000 * (double)(clock() - cl) / CLOCKS_PER_SEC, i);
 
 	if (++i == camera->getWidth())
 	{

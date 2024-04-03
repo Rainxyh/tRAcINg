@@ -33,7 +33,7 @@ float PointLight::Pdf(const EmitterQueryRecord & Record) const
 
 Color3f PointLight::Eval(const EmitterQueryRecord & Record) const
 {
-	return Color3f(0.0f);
+	return BLACK;
 }
 
 std::string PointLight::ToString() const

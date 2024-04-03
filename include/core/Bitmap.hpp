@@ -3,7 +3,6 @@
 #include <core\Common.hpp>
 #include <core\Vector.hpp>
 #include <core\Color.hpp>
-
 NAMESPACE_BEGIN
 
 /**
@@ -28,7 +27,8 @@ public:
 	Bitmap(const std::string & Filename);
 
 	/// Save the bitmap as an EXR file with the specified filename
-	void Save(const std::string & Filename);
+	void SaveEXR(const std::string & Filename);
+	void SavePNG(const std::string & Filename);
 };
 
 NAMESPACE_END
